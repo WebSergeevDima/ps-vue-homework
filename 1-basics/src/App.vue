@@ -1,5 +1,5 @@
 <template>
-  <Button type="button">Начать игру</Button>
+  <Button>Начать игру</Button>
 </template>
 
 <script setup>
