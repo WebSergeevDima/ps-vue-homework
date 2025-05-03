@@ -1,6 +1,6 @@
 <template>
 <div class="wrapper">
-  <Header :score="score" />
+  <Header />
   <div class="content">
     <Card @add-action="addAction" @turn-card="turnCard" />
     <Button type="button">Начать игру</Button>
@@ -12,9 +12,6 @@
 import Button from './components/Button/Button.vue';
 import Header from "./components/Header/Header.vue";
 import Card from "./components/Card/Card.vue";
-import {ref} from "vue";
-
-const score = ref(100);
 
 const addAction = (isAnswer) => {
   console.log('isAnswer: ', isAnswer)

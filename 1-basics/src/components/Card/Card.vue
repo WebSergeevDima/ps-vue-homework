@@ -58,7 +58,7 @@ const props = defineProps({
   position: absolute;
   bottom: -8px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   background-color: var(--color-white);
   padding: 0 5px;
   min-width: 85px;

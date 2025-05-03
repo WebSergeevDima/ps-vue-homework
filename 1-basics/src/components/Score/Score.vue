@@ -1,18 +1,11 @@
 <template>
 <div class="score">
-  {{score}} <IconHeart />
+  100 <IconHeart />
 </div>
 </template>
 
 <script setup>
 import IconHeart from "../../icons/IconHeart.vue";
-
-const {score} = defineProps({
-  score: {
-    type: Number,
-    default: 0
-  }
-})
 </script>
 
 <style scoped>
