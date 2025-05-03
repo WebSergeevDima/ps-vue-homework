@@ -1,7 +1,4 @@
 body {
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -13,6 +10,9 @@ body {
 }
 
 :root {
+  font-family: "Roboto", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   --bg-primary: #CCE8FF;
   --color-white: #FFFFFF;
   --color-primary: #008BFE;

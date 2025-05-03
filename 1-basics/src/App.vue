@@ -19,7 +19,7 @@ const isTurnCard = ref(false);
 
 const addAction = (isAnswer) => {
   console.log('isAnswer: ', isAnswer)
-  score.value = score.value + 1;
+  score.value = isAnswer ?  ++score.value : --score.value;
   isTurnCard.value = false;
 }
 
