@@ -1,13 +1,13 @@
 <template>
 <div class="score">
-  100 <IconHeart />
+  {{ props.score}} <IconHeart />
 </div>
 </template>
 
 <script setup>
 import IconHeart from "../../icons/IconHeart.vue";
 
-const {score} = defineProps({
+const props = defineProps({
   score: {
     type: Number,
     default: 0
