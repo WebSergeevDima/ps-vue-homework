@@ -12,8 +12,9 @@
 import Button from './components/Button/Button.vue';
 import Header from "./components/Header/Header.vue";
 import Card from "./components/Card/Card.vue";
+import {ref} from "vue";
 
-const score = 100;
+const score = ref(100);
 
 const addAction = (isAnswer) => {
   console.log('isAnswer: ', isAnswer)
