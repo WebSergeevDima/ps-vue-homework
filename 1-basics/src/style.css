@@ -9,7 +9,12 @@ body {
   --color-white: #FFFFFF;
   --color-primary: #008BFE;
   --color-primary-hover: #006FCB;
+  --bg-primary: #CCE8FF;
   font-family: "Roboto", sans-serif;
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
 }
