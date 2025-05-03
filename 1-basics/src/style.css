@@ -8,13 +8,13 @@ body {
   margin: 0;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 :root {
   --bg-primary: #CCE8FF;
   --color-white: #FFFFFF;
   --color-primary: #008BFE;
   --color-primary-hover: #006FCB;
-}
-
-* {
-  box-sizing: border-box;
 }

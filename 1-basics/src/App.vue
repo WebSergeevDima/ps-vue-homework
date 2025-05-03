@@ -2,7 +2,7 @@
 <div class="wrapper">
   <Header :score="score" />
   <div class="content">
-    <Card @add-action="addAction" @turn-card="turnCard" />
+    <Card @add-action="addAction" @turn-card="turnCard" :isTurnCard="isTurnCard" />
     <Button type="button">Начать игру</Button>
   </div>
 </div>
@@ -15,13 +15,17 @@ import Card from "./components/Card/Card.vue";
 import {ref} from "vue";
 
 const score = ref(100);
+const isTurnCard = ref(false);
 
 const addAction = (isAnswer) => {
   console.log('isAnswer: ', isAnswer)
+  score.value = score.value + 1;
+  isTurnCard.value = false;
 }
 
 const turnCard = () => {
   console.log('turnCard! ')
+  isTurnCard.value = true;
 }
 </script>
 
