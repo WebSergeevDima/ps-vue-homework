@@ -1,20 +1,17 @@
-body {
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  margin: 0;
+* {
+    box-sizing: border-box;
 }
 
-* {
-  box-sizing: border-box;
+body {
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    margin: 0;
 }
 
 :root {
-  font-family: "Roboto", sans-serif;
-  font-optical-sizing: auto;
-  font-style: normal;
-  --bg-primary: #CCE8FF;
-  --color-white: #FFFFFF;
-  --color-primary: #008BFE;
-  --color-primary-hover: #006FCB;
+    --bg-primary: #CCE8FF;
+    --color-white: #FFFFFF;
+    --color-primary: #008BFE;
+    --color-primary-hover: #006FCB;
 }
