@@ -22,7 +22,7 @@
 import Button from './components/Button/Button.vue';
 import Header from "./components/Header/Header.vue";
 import Card from "./components/Card/Card.vue";
-import { ref } from "vue";
+import {ref} from "vue";
 
 const score = ref(0);
 const isTurnCard = ref(false);
@@ -32,13 +32,25 @@ const cards = ref([
     word: 'En word',
     translation: 'Ru word',
     state: 'closed',
-    status: 'success'
+    status: 'pending'
+  },
+  {
+    word: 'En word 2',
+    translation: 'Ru word 2',
+    state: 'closed',
+    status: 'pending'
   },
   {
     word: 'En word 2',
     translation: 'Ru word 2',
     state: 'closed',
     status: 'success'
+  },
+  {
+    word: 'En word 3',
+    translation: 'Ru word 3',
+    state: 'closed',
+    status: 'fail'
   }
 ]);
 

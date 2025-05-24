@@ -3,16 +3,20 @@
     <div class="content">
       <div class="count">01</div>
       <div class="word">Слово</div>
-
-      <div class="actionBtns" v-if="props.isTurnCard">
+      <div class="status" v-if="props.status === 'success'">
+        <IconYes/>
+      </div>
+      <div class="status" v-if="props.status === 'fail'">
+        <IconNo/>
+      </div>
+      <div class="actionBtns" v-if="props.isTurnCard && props.status === 'pending'">
         <IconNo @click="handleAction(false)" class="btn"/>
         <IconYes @click="handleAction(true)" class="btn"/>
       </div>
-
       <div
           class="actionTurn"
           @click="emit('turnCard')"
-          v-if="!props.isTurnCard"
+          v-if="!props.isTurnCard && props.status === 'pending'"
       >
         Перевернуть
       </div>
@@ -23,7 +27,7 @@
 <script setup>
 import IconYes from "../../icons/IconYes.vue";
 import IconNo from "../../icons/IconNo.vue";
-import { defineProps, defineEmits } from 'vue';
+import {defineProps, defineEmits} from "vue";
 
 const props = defineProps({
   isTurnCard: {
@@ -62,7 +66,7 @@ const handleAction = (isAnswer) => {
   width: 250px;
   height: 376px;
   padding: 15px;
-  box-shadow: 0px 0px 16px 0px #0000001A;
+  box-shadow: 0 0 16px 0 #0000001A;
   border-radius: 16px;
 }
 
@@ -81,36 +85,7 @@ const handleAction = (isAnswer) => {
   left: 17px;
   background-color: var(--color-white);
   padding: 0 3px;
-}
-
-.actionTurn {
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 700;
-  position: absolute;
-  bottom: -14px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--color-white);
-  padding: 0 5px;
-  min-width: 85px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.actionBtns {
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 700;
-  position: absolute;
-  bottom: -20px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--color-white);
-  padding: 0 5px;
-  min-width: 85px;
-  display: flex;
-  justify-content: space-between;
+  z-index: 1;
 }
 
 .word {
@@ -122,7 +97,46 @@ const handleAction = (isAnswer) => {
   font-size: 18px;
 }
 
+.status {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) scale(1.5);
+  width: 40px;
+  z-index: 1;
+}
+
 .btn {
   cursor: pointer;
+}
+
+.actionBtns {
+  transform: translate(-50%, -50%);
+  background-color: var(--color-white);
+  padding: 0 5px;
+  min-width: 85px;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+}
+
+.actionTurn {
+  transform: translate(-50%, -50%);
+  background-color: var(--color-white);
+  padding: 0 5px;
+  min-width: 85px;
+  z-index: 1;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
 }
 </style>
