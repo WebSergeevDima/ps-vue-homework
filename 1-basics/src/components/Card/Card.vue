@@ -4,11 +4,11 @@
       <div class="count">01</div>
       <div class="word">Слово</div>
 
-      <div class="statusSuccess" v-if="props.status === 'success'">
+      <div class="status" v-if="props.status === 'success'">
         <IconYes/>
       </div>
 
-      <div class="statusFail" v-if="props.status === 'fail'">
+      <div class="status" v-if="props.status === 'fail'">
         <IconNo/>
       </div>
 
@@ -101,8 +101,7 @@ const handleAction = (isAnswer) => {
   font-size: 18px;
 }
 
-.statusSuccess,
-.statusFail {
+.status {
   position: absolute;
   top: -8px;
   left: 50%;
