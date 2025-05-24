@@ -3,11 +3,17 @@
     <div class="content">
       <div class="count">01</div>
       <div class="word">Слово</div>
+
       <div class="actionBtns" v-if="props.isTurnCard">
-        <IconNo @click="emit('addAction', false)" class="btn"/>
-        <IconYes @click="emit('addAction', true)" class="btn"/>
+        <IconNo @click="handleAction(false)" class="btn"/>
+        <IconYes @click="handleAction(true)" class="btn"/>
       </div>
-      <div class="actionTurn" @click="emit('turnCard')" v-if="!props.isTurnCard">
+
+      <div
+          class="actionTurn"
+          @click="emit('turnCard')"
+          v-if="!props.isTurnCard"
+      >
         Перевернуть
       </div>
     </div>
@@ -17,9 +23,7 @@
 <script setup>
 import IconYes from "../../icons/IconYes.vue";
 import IconNo from "../../icons/IconNo.vue";
-import {defineProps, defineEmits} from 'vue'
-
-const emit = defineEmits(['addAction', 'turnCard'])
+import { defineProps, defineEmits } from 'vue';
 
 const props = defineProps({
   isTurnCard: {
@@ -44,7 +48,13 @@ const props = defineProps({
     type: String,
     required: true
   }
-})
+});
+
+const emit = defineEmits(['addAction', 'turnCard']);
+
+const handleAction = (isAnswer) => {
+  emit('addAction', isAnswer);
+};
 </script>
 
 <style scoped>
