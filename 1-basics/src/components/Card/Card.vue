@@ -3,20 +3,16 @@
     <div class="content">
       <div class="count">01</div>
       <div class="word">Слово</div>
-
-      <div class="status" v-if="props.status === 'success'">
-        <IconYes/>
+      <div class="status status--success" v-if="props.status === 'success'">
+        <IconYes />
       </div>
-
-      <div class="status" v-if="props.status === 'fail'">
-        <IconNo/>
+      <div class="status status--fail" v-if="props.status === 'fail'">
+        <IconNo />
       </div>
-
       <div class="actionBtns" v-if="props.isTurnCard && props.status === 'pending'">
-        <IconNo @click="handleAction(false)" class="btn"/>
-        <IconYes @click="handleAction(true)" class="btn"/>
+        <IconNo @click="handleAction(false)" class="btn" />
+        <IconYes @click="handleAction(true)" class="btn" />
       </div>
-
       <div
           class="actionTurn"
           @click="emit('turnCard')"
@@ -27,11 +23,10 @@
     </div>
   </div>
 </template>
-
 <script setup>
 import IconYes from "../../icons/IconYes.vue";
 import IconNo from "../../icons/IconNo.vue";
-import {defineProps, defineEmits} from 'vue';
+import { defineProps, defineEmits } from "vue";
 
 const props = defineProps({
   isTurnCard: {
@@ -64,23 +59,20 @@ const handleAction = (isAnswer) => {
   emit('addAction', isAnswer);
 };
 </script>
-
 <style scoped>
 .card {
   width: 250px;
   height: 376px;
   padding: 15px;
-  box-shadow: 0px 0px 16px 0px #0000001A;
+  box-shadow: 0 0 16px 0 #0000001A;
   border-radius: 16px;
 }
-
 .content {
   border: 1px var(--bg-primary) solid;
   border-radius: 12px;
   position: relative;
   height: 100%;
 }
-
 .count {
   font-size: 14px;
   font-weight: 400;
@@ -91,7 +83,6 @@ const handleAction = (isAnswer) => {
   padding: 0 3px;
   z-index: 1;
 }
-
 .word {
   position: absolute;
   top: 50%;
@@ -100,7 +91,6 @@ const handleAction = (isAnswer) => {
   font-weight: 400;
   font-size: 18px;
 }
-
 .status {
   position: absolute;
   top: -8px;
@@ -109,7 +99,6 @@ const handleAction = (isAnswer) => {
   width: 40px;
   z-index: 1;
 }
-
 .actionBtns {
   text-transform: uppercase;
   font-size: 12px;
@@ -125,7 +114,6 @@ const handleAction = (isAnswer) => {
   justify-content: space-between;
   z-index: 1;
 }
-
 .actionTurn {
   text-transform: uppercase;
   font-size: 12px;
@@ -139,7 +127,6 @@ const handleAction = (isAnswer) => {
   min-width: 85px;
   z-index: 1;
 }
-
 .btn {
   cursor: pointer;
 }
