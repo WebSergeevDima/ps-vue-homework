@@ -4,7 +4,14 @@
       <div class="count">01</div>
       <div class="word">Слово</div>
 
-      <div class="actionBtns" v-if="props.isTurnCard">
+      <div class="statusSuccess" v-if="props.status === 'success'">
+        <IconYes/>
+      </div>
+      <div class="statusFail" v-if="props.status === 'fail'">
+        <IconNo/>
+      </div>
+
+      <div class="actionBtns" v-if="props.isTurnCard && props.status === 'pending'">
         <IconNo @click="handleAction(false)" class="btn"/>
         <IconYes @click="handleAction(true)" class="btn"/>
       </div>
@@ -12,7 +19,7 @@
       <div
           class="actionTurn"
           @click="emit('turnCard')"
-          v-if="!props.isTurnCard"
+          v-if="!props.isTurnCard && props.status === 'pending'"
       >
         Перевернуть
       </div>
@@ -23,7 +30,7 @@
 <script setup>
 import IconYes from "../../icons/IconYes.vue";
 import IconNo from "../../icons/IconNo.vue";
-import { defineProps, defineEmits } from 'vue';
+import {defineProps, defineEmits} from 'vue';
 
 const props = defineProps({
   isTurnCard: {
@@ -124,5 +131,14 @@ const handleAction = (isAnswer) => {
 
 .btn {
   cursor: pointer;
+}
+
+.statusSuccess,
+.statusFail {
+  position: absolute;
+  top: -8px;
+  width: 40px;
+  left: 50%;
+  transform: scale(1.5);
 }
 </style>

@@ -32,13 +32,25 @@ const cards = ref([
     word: 'En word',
     translation: 'Ru word',
     state: 'closed',
-    status: 'success'
+    status: 'pending'
+  },
+  {
+    word: 'En word 2',
+    translation: 'Ru word 2',
+    state: 'closed',
+    status: 'pending'
   },
   {
     word: 'En word 2',
     translation: 'Ru word 2',
     state: 'closed',
     status: 'success'
+  },
+  {
+    word: 'En word 3',
+    translation: 'Ru word 3',
+    state: 'closed',
+    status: 'fail'
   }
 ]);
 
