@@ -2,17 +2,19 @@
   <div class="wrapper">
     <Header :score="score"/>
     <div class="content">
-      <Card
-          v-for="card of cards"
-          :key="card.word"
-          :is-turn-card="isTurnCard"
-          :state="card.state"
-          :status="card.status"
-          :translation="card.translation"
-          :word="card.word"
-          @add-action="updateScore"
-          @turn-card="turnCard"
-      />
+      <div class="cards">
+        <Card
+            v-for="card of cards"
+            :key="card.word"
+            :is-turn-card="isTurnCard"
+            :state="card.state"
+            :status="card.status"
+            :translation="card.translation"
+            :word="card.word"
+            @add-action="updateScore"
+            @turn-card="turnCard"
+        />
+      </div>
       <Button type="button">Начать игру</Button>
     </div>
   </div>
@@ -22,37 +24,14 @@
 import Button from './components/Button/Button.vue';
 import Header from "./components/Header/Header.vue";
 import Card from "./components/Card/Card.vue";
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
+
+const API_RANDOM_WORDS = 'http://localhost:8080/api/random-words';
 
 const score = ref(0);
 const isTurnCard = ref(false);
 
-const cards = ref([
-  {
-    word: 'En word',
-    translation: 'Ru word',
-    state: 'closed',
-    status: 'pending'
-  },
-  {
-    word: 'En word 2',
-    translation: 'Ru word 2',
-    state: 'closed',
-    status: 'pending'
-  },
-  {
-    word: 'En word 2',
-    translation: 'Ru word 2',
-    state: 'closed',
-    status: 'success'
-  },
-  {
-    word: 'En word 3',
-    translation: 'Ru word 3',
-    state: 'closed',
-    status: 'fail'
-  }
-]);
+const cards = ref([]);
 
 const updateScore = (isAnswer) => {
   score.value += isAnswer ? 1 : -1;
@@ -62,6 +41,22 @@ const updateScore = (isAnswer) => {
 const turnCard = () => {
   isTurnCard.value = true;
 };
+
+onMounted(async () => {
+  const res = await fetch(API_RANDOM_WORDS, {
+    method: 'GET',
+  })
+
+  const data = await res.json();
+
+  cards.value = data.map(item => {
+    return {
+      ...item,
+      state: 'closed',
+      status: 'pending'
+    }
+  })
+})
 </script>
 
 <style scoped>
@@ -70,12 +65,16 @@ const turnCard = () => {
   flex-direction: column;
 }
 
-.header {
-  height: 100px;
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1500px;
+  gap: 50px;
+  justify-content: center;
+  margin: 0 auto;
 }
 
 .content {
-  display: flex;
   align-items: center;
   justify-content: center;
   height: calc(100vh - 100px);
