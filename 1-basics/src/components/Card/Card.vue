@@ -23,7 +23,8 @@ const props = defineProps({
   isTurnCard: {
     type: Boolean,
     default: false
-  }
+  },
+  card: Object
 })
 </script>
 

@@ -1,11 +1,16 @@
 <template>
-<div class="wrapper">
-  <Header :score="score" />
-  <div class="content">
-    <Card @add-action="addAction" @turn-card="turnCard" :isTurnCard="isTurnCard" />
-    <Button type="button">Начать игру</Button>
+  <div class="wrapper">
+    <Header :score="score"/>
+    <div class="content">
+      <Card
+          @add-action="addAction"
+          @turn-card="turnCard"
+          :isTurnCard="isTurnCard"
+          :card="cardInfo"
+      />
+      <Button type="button">Начать игру</Button>
+    </div>
   </div>
-</div>
 </template>
 
 <script setup>
@@ -16,15 +21,19 @@ import {ref} from "vue";
 
 const score = ref(100);
 const isTurnCard = ref(false);
+const cardInfo = ref({
+  word: 'En word',
+  translation: 'Ru word',
+  state: 'close',
+  status: 'success'
+});
 
 const addAction = (isAnswer) => {
-  console.log('isAnswer: ', isAnswer)
-  score.value = isAnswer ?  ++score.value : --score.value;
+  score.value = isAnswer ? ++score.value : --score.value;
   isTurnCard.value = false;
 }
 
 const turnCard = () => {
-  console.log('turnCard! ')
   isTurnCard.value = true;
 }
 </script>
@@ -34,9 +43,11 @@ const turnCard = () => {
   display: flex;
   flex-direction: column;
 }
+
 .header {
   height: 100px;
 }
+
 .content {
   display: flex;
   align-items: center;
