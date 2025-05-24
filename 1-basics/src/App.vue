@@ -3,10 +3,14 @@
     <Header :score="score"/>
     <div class="content">
       <Card
+          v-for="card of cards"
+          :isTurnCard="isTurnCard"
+          :state="card.state"
+          :status="card.status"
+          :translation="card.translation"
+          :word="card.word"
           @add-action="addAction"
           @turn-card="turnCard"
-          :isTurnCard="isTurnCard"
-          :card="cardInfo"
       />
       <Button type="button">Начать игру</Button>
     </div>
@@ -19,14 +23,14 @@ import Header from "./components/Header/Header.vue";
 import Card from "./components/Card/Card.vue";
 import {ref} from "vue";
 
-const score = ref(100);
+const score = ref(0);
 const isTurnCard = ref(false);
-const cardInfo = ref({
+const cards = ref([{
   word: 'En word',
   translation: 'Ru word',
   state: 'close',
   status: 'success'
-});
+}]);
 
 const addAction = (isAnswer) => {
   score.value = isAnswer ? ++score.value : --score.value;

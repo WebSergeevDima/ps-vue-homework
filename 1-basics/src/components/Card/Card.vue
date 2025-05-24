@@ -24,7 +24,18 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  card: Object
+  state: {
+    type: String
+  },
+  status: {
+    type: String
+  },
+  translation: {
+    type: String
+  },
+  word: {
+    type: String
+  },
 })
 </script>
 
