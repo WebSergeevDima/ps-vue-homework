@@ -4,8 +4,8 @@
       <div class="count">01</div>
       <div class="word">Слово</div>
       <div class="actionBtns" v-if="props.isTurnCard">
-        <IconNo @click="emit('addAction', false)" class="btn" />
-        <IconYes @click="emit('addAction', true)" class="btn" />
+        <IconNo @click="emit('addAction', false)" class="btn"/>
+        <IconYes @click="emit('addAction', true)" class="btn"/>
       </div>
       <div class="actionTurn" @click="emit('turnCard')" v-if="!props.isTurnCard">
         Перевернуть
@@ -17,25 +17,33 @@
 <script setup>
 import IconYes from "../../icons/IconYes.vue";
 import IconNo from "../../icons/IconNo.vue";
+import {defineProps, defineEmits} from 'vue'
 
-const emit = defineEmits(['addAction', 'turnCard']);
+const emit = defineEmits(['addAction', 'turnCard'])
+
 const props = defineProps({
   isTurnCard: {
     type: Boolean,
     default: false
   },
   state: {
-    type: String
+    type: String,
+    required: true,
+    validator: value => ['closed', 'opened'].includes(value)
   },
   status: {
-    type: String
+    type: String,
+    required: true,
+    validator: value => ['success', 'fail', 'pending'].includes(value)
   },
   translation: {
-    type: String
+    type: String,
+    required: true
   },
   word: {
-    type: String
-  },
+    type: String,
+    required: true
+  }
 })
 </script>
 

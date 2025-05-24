@@ -28,7 +28,7 @@ const isTurnCard = ref(false);
 const cards = ref([{
   word: 'En word',
   translation: 'Ru word',
-  state: 'close',
+  state: 'closed',
   status: 'success'
 }]);
 
