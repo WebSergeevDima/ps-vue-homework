@@ -7,6 +7,7 @@
       <div class="statusSuccess" v-if="props.status === 'success'">
         <IconYes/>
       </div>
+
       <div class="statusFail" v-if="props.status === 'fail'">
         <IconNo/>
       </div>
@@ -88,21 +89,26 @@ const handleAction = (isAnswer) => {
   left: 17px;
   background-color: var(--color-white);
   padding: 0 3px;
+  z-index: 1;
 }
 
-.actionTurn {
-  text-transform: uppercase;
-  font-size: 12px;
-  font-weight: 700;
+.word {
   position: absolute;
-  bottom: -14px;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
   left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: var(--color-white);
-  padding: 0 5px;
-  min-width: 85px;
-  display: flex;
-  justify-content: space-between;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.statusSuccess,
+.statusFail {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) scale(1.5);
+  width: 40px;
+  z-index: 1;
 }
 
 .actionBtns {
@@ -118,27 +124,24 @@ const handleAction = (isAnswer) => {
   min-width: 85px;
   display: flex;
   justify-content: space-between;
+  z-index: 1;
 }
 
-.word {
+.actionTurn {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%) translateX(-50%);
+  bottom: -14px;
   left: 50%;
-  font-weight: 400;
-  font-size: 18px;
+  transform: translate(-50%, -50%);
+  background-color: var(--color-white);
+  padding: 0 5px;
+  min-width: 85px;
+  z-index: 1;
 }
 
 .btn {
   cursor: pointer;
-}
-
-.statusSuccess,
-.statusFail {
-  position: absolute;
-  top: -8px;
-  width: 40px;
-  left: 50%;
-  transform: scale(1.5);
 }
 </style>

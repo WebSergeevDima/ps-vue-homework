@@ -22,7 +22,7 @@
 import Button from './components/Button/Button.vue';
 import Header from "./components/Header/Header.vue";
 import Card from "./components/Card/Card.vue";
-import { ref } from "vue";
+import {ref} from "vue";
 
 const score = ref(0);
 const isTurnCard = ref(false);
