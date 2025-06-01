@@ -3,20 +3,20 @@
     <div class="content">
       <div class="count">01</div>
       <div class="word">Слово</div>
-      <div class="status" v-if="props.status === 'success'">
+      <div v-if="props.status === 'success'" class="status">
         <IconYes/>
       </div>
-      <div class="status" v-if="props.status === 'fail'">
+      <div v-if="props.status === 'fail'" class="status">
         <IconNo/>
       </div>
-      <div class="actionBtns" v-if="props.isTurnCard && props.status === 'pending'">
-        <IconNo @click="handleAction(false)" class="btn"/>
-        <IconYes @click="handleAction(true)" class="btn"/>
+      <div v-if="props.isTurnCard && props.status === 'pending'" class="actionBtns">
+        <IconNo class="btn" @click="handleAction(false)"/>
+        <IconYes class="btn" @click="handleAction(true)"/>
       </div>
       <div
+          v-if="!props.isTurnCard && props.status === 'pending'"
           class="actionTurn"
           @click="emit('turnCard')"
-          v-if="!props.isTurnCard && props.status === 'pending'"
       >
         Перевернуть
       </div>
