@@ -2,7 +2,13 @@
   <div class="wrapper">
     <Header :score="score"/>
     <div class="content">
-      <div class="cards">
+      <div v-if="error" class="error">
+        {{ error }}
+      </div>
+      <div v-else-if="isLoading" class="loading">
+        Loading...
+      </div>
+      <div v-else class="cards">
         <Card
             v-for="card of cards"
             :key="card.word"
@@ -15,7 +21,7 @@
             @turn-card="turnCard"
         />
       </div>
-      <Button type="button">Начать игру</Button>
+      <Button type="button" @click="startGame">Начать игру</Button>
     </div>
   </div>
 </template>
@@ -30,6 +36,8 @@ const API_RANDOM_WORDS = 'http://localhost:8080/api/random-words';
 
 const score = ref(0);
 const isTurnCard = ref(false);
+const isLoading = ref(false);
+const error = ref(null);
 
 const cards = ref([]);
 
@@ -42,21 +50,34 @@ const turnCard = () => {
   isTurnCard.value = true;
 };
 
-onMounted(async () => {
-  const res = await fetch(API_RANDOM_WORDS, {
-    method: 'GET',
-  })
+const startGame = async () => {
+  isLoading.value = true;
+  error.value = null;
 
-  const data = await res.json();
+  try {
+    const res = await fetch(API_RANDOM_WORDS, {
+      method: 'GET',
+    });
 
-  cards.value = data.map(item => {
-    return {
+    if (!res.ok) {
+      throw new Error('Ошибка');
+    }
+
+    const data = await res.json();
+
+    cards.value = data.map(item => ({
       ...item,
       state: 'closed',
       status: 'pending'
-    }
-  })
-})
+    }));
+  } catch (err) {
+    error.value = err.message;
+  } finally {
+    isLoading.value = false;
+  }
+};
+
+onMounted(startGame);
 </script>
 
 <style scoped>
@@ -78,5 +99,16 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   height: calc(100vh - 100px);
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.loading {
+  text-align: center;
+  margin: 20px 0;
 }
 </style>
