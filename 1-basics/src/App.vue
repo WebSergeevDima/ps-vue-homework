@@ -10,13 +10,14 @@
       </div>
       <div v-else class="cards">
         <Card
-            v-for="card of cards"
+            v-for="(card, i) of cards"
             :key="card.word"
             :is-turn-card="isTurnCard"
             :state="card.state"
             :status="card.status"
             :translation="card.translation"
             :word="card.word"
+            :index="i"
             @add-action="updateScore"
             @turn-card="turnCard"
         />
@@ -41,8 +42,9 @@ const error = ref(null);
 
 const cards = ref([]);
 
-const updateScore = (isAnswer) => {
+const updateScore = (isAnswer, cardIndex) => {
   score.value += isAnswer ? 1 : -1;
+  cards.value[cardIndex].status = isAnswer ? 'success' : 'fail';
   isTurnCard.value = false;
 };
 

@@ -1,8 +1,9 @@
 <template>
   <div class="card">
     <div class="content">
-      <div class="count">01</div>
-      <div class="word">Слово</div>
+      <div class="count">{{ addZero(index + 1) }}</div>
+      <div class="word" v-if="isTurnCard">{{word}}</div>
+      <div class="word" v-else>{{translation}}</div>
       <div v-if="props.status === 'success'" class="status">
         <IconYes/>
       </div>
@@ -10,8 +11,8 @@
         <IconNo/>
       </div>
       <div v-if="props.isTurnCard && props.status === 'pending'" class="actionBtns">
-        <IconNo class="btn" @click="handleAction(false)"/>
-        <IconYes class="btn" @click="handleAction(true)"/>
+        <IconNo class="btn" @click="handleAction(false, index)"/>
+        <IconYes class="btn" @click="handleAction(true, index)"/>
       </div>
       <div
           v-if="!props.isTurnCard && props.status === 'pending'"
@@ -28,6 +29,10 @@
 import IconYes from "../../icons/IconYes.vue";
 import IconNo from "../../icons/IconNo.vue";
 import {defineProps, defineEmits} from "vue";
+
+function addZero(n) {
+  return n < 10 ? '0' + n : n;
+}
 
 const props = defineProps({
   isTurnCard: {
@@ -51,13 +56,17 @@ const props = defineProps({
   word: {
     type: String,
     required: true
+  },
+  index: {
+    type: Number,
+    required: true
   }
 });
 
 const emit = defineEmits(['addAction', 'turnCard']);
 
-const handleAction = (isAnswer) => {
-  emit('addAction', isAnswer);
+const handleAction = (isAnswer, index) => {
+  emit('addAction', isAnswer, index);
 };
 </script>
 
