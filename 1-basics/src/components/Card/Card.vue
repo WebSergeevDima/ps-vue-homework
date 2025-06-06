@@ -30,8 +30,8 @@ import IconYes from "../../icons/IconYes.vue";
 import IconNo from "../../icons/IconNo.vue";
 import {defineProps, defineEmits} from "vue";
 
-function addZero(n) {
-  return n < 10 ? '0' + n : n;
+function addZero(number) {
+  return number < 10 ? '0' + number : number;
 }
 
 const props = defineProps({
