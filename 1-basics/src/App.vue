@@ -8,7 +8,7 @@
       <div v-else-if="isLoading" class="loading">
         Loading...
       </div>
-      <div v-else class="cards">
+      <div v-else-if="cards.length" class="cards">
         <Card
             v-for="(card, i) of cards"
             :key="card.word"
@@ -22,7 +22,8 @@
             @turn-card="turnCard"
         />
       </div>
-      <Button type="button" @click="startGame">Начать игру</Button>
+      <Button v-if="!cards.length" type="button" @click="startGame">Начать игру</Button>
+      <Button v-if="cards.length" type="button" @click="startGame">Начать заново</Button>
     </div>
   </div>
 </template>
@@ -31,7 +32,7 @@
 import Button from './components/Button/Button.vue';
 import Header from "./components/Header/Header.vue";
 import Card from "./components/Card/Card.vue";
-import {onMounted, ref} from "vue";
+import {ref} from "vue";
 
 const API_RANDOM_WORDS = 'http://localhost:8080/api/random-words';
 
@@ -43,7 +44,7 @@ const error = ref(null);
 const cards = ref([]);
 
 const updateScore = (isAnswer, cardIndex) => {
-  score.value += isAnswer ? 1 : -1;
+  score.value += isAnswer ? 10 : -4;
   cards.value[cardIndex].status = isAnswer ? 'success' : 'fail';
   isTurnCard.value = false;
 };
@@ -78,8 +79,6 @@ const startGame = async () => {
     isLoading.value = false;
   }
 };
-
-onMounted(startGame);
 </script>
 
 <style scoped>
@@ -98,9 +97,13 @@ onMounted(startGame);
 }
 
 .content {
+  display: flex;
   align-items: center;
   justify-content: center;
   height: calc(100vh - 100px);
+  text-align: center;
+  flex-direction: column;
+  gap: 100px;
 }
 
 .error {
