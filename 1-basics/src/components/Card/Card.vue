@@ -111,7 +111,6 @@ const handleAction = (isAnswer, index) => {
   top: -8px;
   left: 50%;
   transform: translateX(-50%) scale(1.5);
-  width: 40px;
   z-index: 1;
 }
 
